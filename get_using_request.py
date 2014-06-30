@@ -1,7 +1,12 @@
 import requests
-import json
+import simplejson
 
 r = requests.get("http://ws.audioscrobbler.com/2.0/?method=user.gettopartists&user=alisatrocity&api_key=8148fb40ef9511752203d2c4591e63d0&format=json&limit=5")
-print r.status_code
-info = json.loads(r.text)
-print info
+info = simplejson.loads(r.text)
+def get_artists(data):
+    index = 1
+    for item in data["topartists"]["artist"]:
+        print "%s: %s" % (index, item["name"])
+        index+=1
+
+get_artists(info)
