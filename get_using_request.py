@@ -9,4 +9,5 @@ def get_artists(data):
         print "%s: %s" % (index, item["name"])
         index+=1
 
+print "User: %s\n" % (info["topartists"]["@attr"]["user"])
 get_artists(info)
