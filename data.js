@@ -6,7 +6,7 @@ var data = function makeRequest(apiUrl){
 	})
 	.done(function(res) {
 		console.log("success");
-		console.log(playCountData(res['topartists']['artist']));
+		return playCountData(res['topartists']['artist']);
 	})
 	.fail(function() {
 		console.log("error");
@@ -16,13 +16,16 @@ var data = function makeRequest(apiUrl){
 	});	
 }
 
-function playCountData(data){
-	for (item in data){
-		console.log(data[item]['playcount']);
-		return (data[item]['playcount'])
+function playCountData(array){
+	for (item in array){
+		console.log(array[item]['name'] + " : " + array[item]['playcount']);
+		// return (array[item]['playcount']);
+		// return (data[item]['playcount'])
 	}
 }
 
+
+// var data = [1, 2, 99, 32, 42, 100];
 // var x = d3.scale.linear()
 //     .domain([0, d3.max(data)])
 //     .range([0, 420]);
