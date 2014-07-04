@@ -6,7 +6,7 @@ var data = function makeRequest(apiUrl){
 	})
 	.done(function(res) {
 		console.log("success");
-		console.log(res['topartists']['artist']);
+		console.log(playCountData(res['topartists']['artist']));
 	})
 	.fail(function() {
 		console.log("error");
@@ -16,16 +16,20 @@ var data = function makeRequest(apiUrl){
 	});	
 }
 
-data(lastFMurl)
+function playCountData(data){
+	for (item in data){
+		console.log(data[item]['playcount']);
+		return (data[item]['playcount'])
+	}
+}
 
-
-var x = d3.scale.linear()
-    .domain([0, d3.max(data)])
-    .range([0, 420]);
+// var x = d3.scale.linear()
+//     .domain([0, d3.max(data)])
+//     .range([0, 420]);
 
 d3.select(".chart")
   .selectAll("div")
-    .data()
+    .data(data(lastFMurl))
   .enter().append("div")
-    .style("width", function(d) { return x(d) + "px"; })
+    .style("width", function(d) { return d + "px"; })
     .text(function(d) { return d; });
