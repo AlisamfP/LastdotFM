@@ -1,5 +1,6 @@
 $('document').ready(function(){
 $('button').click(function(event) {
+	//clear chart before making new one
 	$('div').empty();
 	makeURL((document.getElementById('user').value),
 		(document.getElementById('period').value), 
@@ -18,12 +19,7 @@ function makeRequest(apiUrl){
 		url: apiUrl,
 	})
 	.done(function(res) {
-		d3.select(".chart")
-  			.selectAll("div")
-    		.data(playCountData(res['topartists']['artist']))
-  		.enter().append("div")
-    		.style("width", function(d) { return d[1] + "px"; })
-    		.text(function(d) { return d[0]+" : "+d[1]; });
+		playCountData(res['topartists']['artist']);
 	})
 	.fail(function(err) {
 		console.log("error: ", err);
@@ -38,6 +34,22 @@ function playCountData(array){
 	for (item in array){
 		artists.push([array[item]['name'], parseInt(array[item]['playcount'])]);
 	}
-	return artists;
+	console.log(artists);
+	return goD3go(artists);
 }
 });
+
+function goD3go(info){
+	//https://github.com/mbostock/d3/wiki/Quantitative-Scales
+	var x = d3.scale.linear()
+		.domain([0, d3.max(info.map(function(n){
+			return n[1];
+		}))])
+		.range([0, document.body.clientWidth-300]);
+	d3.select(".chart")
+  			.selectAll("div")
+    		.data(info)
+  		.enter().append("div")
+    		.style("width", function(d) { return x(d[1]) + "px"; })
+    		.text(function(d) { return d[0]+" : "+d[1]; });
+}
