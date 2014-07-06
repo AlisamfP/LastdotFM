@@ -8,8 +8,8 @@ function makeRequest(apiUrl){
   			.selectAll("div")
     		.data(playCountData(res['topartists']['artist']))
   		.enter().append("div")
-    		.style("width", function(d) { return d + "px"; })
-    		.text(function(d) { return d; });
+    		.style("width", function(d) { return d[1] + "px"; })
+    		.text(function(d) { return d[0]+" : "+d[1]; });
 	})
 	.fail(function() {
 		console.log("error");
@@ -22,7 +22,7 @@ function makeRequest(apiUrl){
 function playCountData(array){
 	var x = [];
 	for (item in array){
-		x.push(parseInt(array[item]['playcount']));
+		x.push([array[item]['name'], parseInt(array[item]['playcount'])]);
 		// console.log(array[item]['name'] + " : " + array[item]['playcount']);
 	}
 	console.log(x);
