@@ -4,7 +4,7 @@
 	<link rel="stylesheet" type="text/css" href="stylesheet.css">
 </head>
 <body>
-	<select name="period">
+	<select id="period">
 		<option value="overall">overall</option>
 		<option value="7day">last 7 days</option>
 		<option value="1month">last 1 month</option>
@@ -12,10 +12,11 @@
 		<option value="6month">last 6 months</option>
 		<option value="12month">last 12 months</option>
 	</select>
+	<input type="text" id="limit">Limit (max 50)</input>
+	<button>Get Chart</button>
 	<div class="chart"></div>
 </body>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 	<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 	<script type="text/javascript" src="data.js"></script>
-	<script type="text/javascript" src="visual.js"></script>
 </html>
