@@ -1,15 +1,15 @@
 .chart rect {
 	fill: steelblue;
 
-/*  font: 10px sans-serif;
-  background-color: steelblue;
-  text-align: right;
-  padding: 3px;
-  margin: 1px;
-  color: white;*/
+
 }
 .chart text{
 	fill: white;
 	font: 10px sans-serif;
 	text-anchor: end;
+}
+
+html{
+	color: white;
+	background-image: url("bkgrndimg.png");
 }
