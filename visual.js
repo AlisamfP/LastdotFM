@@ -1,10 +1,8 @@
-// http://bost.ocks.org/mike/bar/3/#margins <<< To resume tutorial and add margins
-
-
 function generateChart(info){
 	//https://github.com/mbostock/d3/wiki/Quantitative-Scales
-	var width = 960, height = 500;
-
+	var margin = {top: 20, right: 30, bottom: 30, left: 40},
+    width = 960 - margin.left - margin.right, 
+    height = 500 - margin.top - margin.bottom;
 
 	var x = d3.scale.ordinal()
     .domain(info.map(function(n){ return n[0];}))
@@ -18,16 +16,16 @@ function generateChart(info){
 		.range([height, 0]);
 	
   var chart = d3.select(".chart")
-    .attr('width', width)
-    .attr('height', height);
-
+    .attr('width', width + margin.left + margin.right)
+    .attr('height', height + margin.top + margin.bottom)
+      .append('g').attr('trasform', 'translate('+margin.left + "," + margin.top + ")");
   // create variable for selecting the bars in the chart 
   var bar = chart.selectAll("g")
   	.data(info)
   	.enter().append("g")
     	.attr('transform', function(d){
   	    	return "translate(" + x(d[0]) + ",0)";
-  	});
+      });
   
   //set the attributes for the rectangles of the chart
   bar.append("rect")
@@ -38,7 +36,7 @@ function generateChart(info){
   // write text on the bar of the graph
   bar.append("text")
   	.attr('x', x.rangeBand() / 2)
-  	.attr("y", function(d){ return y(d[1]) + 15; })
+  	.attr("y", function(d){ return y(d[1]) + 3; })
   	.attr('dy', '.75em')
   	.text(function(d){ return d[0]; });
 };
