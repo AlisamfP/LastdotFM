@@ -1,15 +1,21 @@
-.chart rect {
+.bar {
 	fill: steelblue;
-
-
-}
-.chart text{
-	fill: white;
-	font: 10px sans-serif;
-	text-anchor: middle;
 }
 
-html{
+html {
 	color: white;
 	background-image: url("bkgrndimg.png");
 }
+.axis text {
+    font: 10px sans-serif;
+}
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+.x.axis path {
+    display: none;
+}
+
