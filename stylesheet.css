@@ -1,13 +1,15 @@
 .bar {
 	fill: steelblue;
 }
-
+.bar:hover {
+	fill: brown;
+}
 html {
 	color: white;
 	background-image: url("bkgrndimg.png");
 }
 .axis text {
-    font: 10px sans-serif;
+    font: 10px sans-serif white;
 }
 .axis path,
 .axis line {
