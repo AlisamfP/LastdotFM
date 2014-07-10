@@ -1,5 +1,6 @@
 .bar {
 	fill: steelblue;
+	opacity: 0.5;
 }
 .bar:hover {
 	fill: brown;
@@ -9,7 +10,8 @@ html {
 	background-image: url("bkgrndimg.png");
 }
 .axis text {
-    font: 10px sans-serif white;
+    font: 10px sans-serif;
+    color: white;
 }
 .axis path,
 .axis line {
@@ -17,7 +19,7 @@ html {
     stroke: #000;
     shape-rendering: crispEdges;
 }
-.x.axis path {
-    display: none;
-}
 
+.bar text {
+	fill: white;
+}
