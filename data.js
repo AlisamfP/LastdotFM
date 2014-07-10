@@ -3,12 +3,12 @@ $('button').click(function() {
 	//clear chart before making new one
 	$('svg').empty();
 	return makeURL((document.getElementById('user').value),
-		(document.getElementById('period').value), 
+		(document.getElementById('period').value),
 		(document.getElementById('limit').value));
 });
 
 function makeURL(user, period, limit){
-	limit = (isNaN(limit) != true) ? parseInt(limit) : 10;
+	limit = (isNaN(limit) !== true) ? parseInt(limit) : 10;
 	url = 'http://ws.audioscrobbler.com/2.0/?method=user.gettopartists&user=';
 	api_key = '8148fb40ef9511752203d2c4591e63d0';
 	makeRequest(url+user
@@ -29,7 +29,7 @@ function makeRequest(apiUrl){
 	})
 	.always(function() {
 		console.log("complete");
-	});	
+	});
 }
 
 function playCountData(array){
@@ -37,7 +37,6 @@ function playCountData(array){
 	for (item in array){
 		artists.push([array[item]['name'], parseInt(array[item]['playcount'])]);
 	}
-	console.log(artists);
 	return generateChart(artists);
 }
 });

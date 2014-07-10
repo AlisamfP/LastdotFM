@@ -1,6 +1,5 @@
 .bar {
 	fill: steelblue;
-	opacity: 0.5;
 }
 .bar:hover {
 	fill: brown;
