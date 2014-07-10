@@ -36,18 +36,20 @@ function generateChart(info){
         .attr('height', function(d){ return height - y(d[1]); })
         .attr('width', x.rangeBand());
 
-  chart.selectAll('.bar')
-     .append('text')
-     .attr('x', function(d){ return x(d[0]) / 2 ; })
-     .attr('y', function(d){ return height - y(d[1]) / 2 ; })
-     .attr('text-anchor', 'end')
-     .attr('trasform', 'rotate(-90)')
-     .attr('dy', '.35em')
-     .attr('z-index', 500)
+
+
+ chart.selectAll("text")
+    .data(info)
+       .enter().append("text")
+       .attr('transform', 'rotate(-90)')
+     .attr("y", function(d) { return x(d[0]); })
+     .attr("x", function(d) { return -height; })
+     .attr('dy', 30)
+     .attr("text-anchor", "left") // text-align: right
       .text(function(d){
-        console.log(d[0]);
         return d[0];
       });
+
 
   chart.append('g')
     .attr('class', 'y axis')
