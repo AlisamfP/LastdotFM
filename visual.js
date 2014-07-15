@@ -14,16 +14,13 @@ function generateChart(info){
   var yAxis = d3.svg.axis()
       .scale(y)
       .orient('left');
-
   var chart = d3.select('.chart')
     .attr('width', width + margin.left + margin.right)
     .attr('height', height + margin.top + margin.bottom)
     .append('g')
     .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
-
   x.domain(info.map(function(n){ return n[0];}));
   y.domain([0, d3.max(info.map(function(n){ return n[1];}))]);
-
  chart.selectAll('.bar')
   .data(info)
   .enter()
@@ -38,21 +35,22 @@ function generateChart(info){
 
 
 
- chart.selectAll("text")
-    .data(info)
-       .enter().append("text")
-       .attr('transform', 'rotate(-90)')
-     .attr("y", function(d) { return x(d[0]); })
-     .attr("x", function(d) { return -height; })
-     .attr('dy', 30)
-     .attr("text-anchor", "left") // text-align: right
-      .text(function(d){
-        return d[0];
-      });
+ var addText = chart.selectAll('text')
+                .data(info)
+                  .enter().append('text')
+                .attr('class', 'artists')
+                .attr('transform', 'rotate(-90)')
+                .attr('y', function(d) { return x(d[0]); })
+                .attr('x', function(d) { return -height; })
+                .attr('dy', 40)
+                .attr('dx', 5)
+                .attr('text-anchor', 'left')
+                  .text(function(d){
+                    return d[0];
+                  });
 
 
   chart.append('g')
     .attr('class', 'y axis')
     .call(yAxis);
-
 };

@@ -5,14 +5,20 @@ $('button').click(function() {
 	return makeURL((document.getElementById('user').value),
 		(document.getElementById('period').value),
 		(document.getElementById('limit').value));
+})
+
+
+$('.bar').click(function() {
+  $(this).toggleClass('artists');
 });
+
 
 function makeURL(user, period, limit){
 	limit = (isNaN(limit) !== true) ? parseInt(limit) : 10;
-	url = 'http://ws.audioscrobbler.com/2.0/?method=user.gettopartists&user=';
-	api_key = '8148fb40ef9511752203d2c4591e63d0';
-	makeRequest(url+user
-		+'&api_key='+api_key+
+	baseUrl = 'http://ws.audioscrobbler.com/2.0/?method=user.gettopartists&user=';
+	apiKey = '8148fb40ef9511752203d2c4591e63d0';
+	makeRequest(baseUrl+user
+		+'&api_key='+apiKey+
 		'&format=json&period='+period+
 		'&limit='+limit);
 }
