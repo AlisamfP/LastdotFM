@@ -19,36 +19,36 @@ function generateChart(info){
     .attr('height', height + margin.top + margin.bottom)
     .append('g')
     .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+
   x.domain(info.map(function(n){ return n[0];}));
   y.domain([0, d3.max(info.map(function(n){ return n[1];}))]);
- chart.selectAll('.bar')
-  .data(info)
-  .enter()
-    .append('rect')
+
+var bar = chart.selectAll('.bar')
+          .data(info)
+            .enter()
+              .append('rect')
         .attr('class', 'bar')
-        .attr('id', 'graph_data')
-        .attr('z-index', 1)
         .attr('x', function(d){ return x(d[0]); })
         .attr('y', function(d){ return y(d[1]); })
         .attr('height', function(d){ return height - y(d[1]); })
         .attr('width', x.rangeBand());
 
 
-
- var addText = chart.selectAll('text')
-                .data(info)
-                  .enter().append('text')
-                .attr('class', 'artists')
-                .attr('transform', 'rotate(-90)')
-                .attr('y', function(d) { return x(d[0]); })
-                .attr('x', function(d) { return -height; })
-                .attr('dy', 40)
-                .attr('dx', 5)
-                .attr('text-anchor', 'left')
-                  .text(function(d){
-                    return d[0];
-                  });
-
+bar.select('text')
+    .data(info)
+        .enter()
+          .append('text')
+          .attr('transform', 'rotate(-90)')
+          .attr('y', function(d) { return x(d[0]); })
+          .attr('x', function(d) { return -height; })
+          .attr('height', function(d){ return height - y(d[1]); })
+          .attr('width', x.rangeBand())
+          .attr('dy', x.rangeBand()/2)
+          .attr('dx', 5)
+          .attr('text-anchor', 'left')
+            .text(function(d){
+              return d[0];
+            });
 
   chart.append('g')
     .attr('class', 'y axis')

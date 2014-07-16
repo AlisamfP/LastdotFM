@@ -7,12 +7,6 @@ $('button').click(function() {
 		(document.getElementById('limit').value));
 })
 
-
-$('.bar').click(function() {
-  $(this).toggleClass('artists');
-});
-
-
 function makeURL(user, period, limit){
 	limit = (isNaN(limit) !== true) ? parseInt(limit) : 10;
 	baseUrl = 'http://ws.audioscrobbler.com/2.0/?method=user.gettopartists&user=';

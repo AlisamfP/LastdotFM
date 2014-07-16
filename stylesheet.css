@@ -8,9 +8,6 @@ html {
 	color: white;
 	background-image: url("bkgrndimg.png");
 }
-.artists{
-	visibility: hidden;
-}
 .axis text {
     font: 10px sans-serif;
     color: white;
