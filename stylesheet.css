@@ -4,6 +4,8 @@
 .bar:hover {
 	fill: brown;
 }
+
+
 html {
 	color: white;
 	background-image: url("bkgrndimg.png");
@@ -21,4 +23,5 @@ html {
 
 text {
 	fill: white;
+	font-size: 17px;
 }

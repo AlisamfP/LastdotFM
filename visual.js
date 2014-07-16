@@ -46,6 +46,7 @@ bar.select('text')
           .attr('dy', x.rangeBand()/2)
           .attr('dx', 5)
           .attr('text-anchor', 'left')
+          // .attr('visibility', 'hidden')
             .text(function(d){
               return d[0];
             });
