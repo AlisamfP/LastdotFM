@@ -7,6 +7,13 @@ $('button').click(function() {
 		(document.getElementById('limit').value));
 })
 
+$('.bar').on('click',function(){
+	var active = '.barText' + this.id.toString();
+	$(active).removeAttr('visibility');
+})
+
+
+
 function makeURL(user, period, limit){
 	limit = (isNaN(limit) !== true) ? parseInt(limit) : 10;
 	baseUrl = 'http://ws.audioscrobbler.com/2.0/?method=user.gettopartists&user=';
@@ -39,4 +46,4 @@ function playCountData(array){
 	}
 	return generateChart(artists);
 }
-});
+} );

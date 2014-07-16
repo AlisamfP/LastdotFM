@@ -1,14 +1,12 @@
+html {
+	color: white;
+	background-image: url("bkgrndimg.png");
+}
 .bar {
 	fill: steelblue;
 }
 .bar:hover {
 	fill: brown;
-}
-
-
-html {
-	color: white;
-	background-image: url("bkgrndimg.png");
 }
 .axis text {
     font: 10px sans-serif;
@@ -20,7 +18,6 @@ html {
     stroke: #000;
     shape-rendering: crispEdges;
 }
-
 text {
 	fill: white;
 	font-size: 17px;
