@@ -27,6 +27,11 @@ $('document').ready(function(){
 		})
 		.always(function() {
 			console.log('complete');
+			$('.bar').click(function(){
+				console.log('DICKS');
+				var active = '.barText' + this.id.toString();
+				$(active).removeAttr('visibility');
+			});
 		});
 	}
 
@@ -37,9 +42,12 @@ $('document').ready(function(){
 		}
 		return generateChart(artists);
 	}
+<<<<<<< HEAD
 	$('.bar').click(function(){
 		console.log('DICKS');
 		var active = '.barText' + this.id.toString();
 		$(active).removeAttr('visibility');
 	});
+=======
+>>>>>>> c4d120b2be29a50a77c0774e584f8267fabb8bde
 } );
