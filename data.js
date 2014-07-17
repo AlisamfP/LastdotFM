@@ -1,9 +1,4 @@
 $('document').ready(function(){
-	$('.bar').click(function(){
-		console.log('DICKS');
-		var active = '.barText' + this.id.toString();
-		$(active).removeAttr('visibility');
-	});
 	$('button').click(function() {
 		//clear chart before making new one
 		$('svg').empty();
@@ -42,4 +37,9 @@ $('document').ready(function(){
 		}
 		return generateChart(artists);
 	}
+	$('.bar').click(function(){
+		console.log('DICKS');
+		var active = '.barText' + this.id.toString();
+		$(active).removeAttr('visibility');
+	});
 } );
