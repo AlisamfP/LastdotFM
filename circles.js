@@ -1,20 +1,30 @@
 function createCircles(info){
-	// var x = d3.scale.linear()
-			// .domain(info.map(function(n){ return n[1];}))
-			// .range([500,0]);
+	var margin = {top: 20, right: 30, bottom: 30, left: 40},
+    	width = 960 - margin.left - margin.right,
+    	height = 500 - margin.top - margin.bottom;
+
+	var x = d3.scale.linear()
+		.domain([d3.max(info.map(function(n){ return n[1]; })),0])
+		.range([0,width]);
+
+	var circleScale = d3.scale.linear()
+		.domain([0,d3.max(info.map(function(n){ return n[1]; }))])
+		.range([0,width/info.length]);
 
 	var svg = d3.select('svg')
-				.attr('width', 700)
-				.attr('height', 500);
+				.attr('width', width)
+				.attr('height', height);
 
 	var circles = svg.selectAll('circle')
 		.data(info)
 		.enter()
 		.append('circle')
 		.attr('r', function(d){
-			return (d[1]/d.length);
+			return (circleScale(d[1]));
 		})
-		.attr('cx', function(d, i){return i * 100 + 90;})
+		.attr('cx', function(d){
+			return(50 + x(d[1]));
+		})
 		.attr('cy', 150);
 
 	circles
@@ -26,9 +36,9 @@ function createCircles(info){
 		.data(info)
 		.enter()
 		.append('text')
-		.attr('x', function(d, i){return i*100 +70;})
+		.attr('x', function(d){ return 50 + (x(d[1])); })
 		.attr('y', 150)
 		.attr('color', 'black')
 		.attr('font-size', '30px')
-		.text(function(d){return d[1];});
+		.text(function(d){ return d[1]; });
 };
