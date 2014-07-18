@@ -19,24 +19,24 @@ function createCircles(info){
 		.data(info)
 		.enter()
 		.append('circle')
+		.attr('class', 'circle')
 		.attr('r', function(d){
 			return (circleScale(d[1]));
 		})
 		.attr('cx', function(d){
-			return(50 + x(d[1]));
+			return(100 + x(d[1]));
 		})
 		.attr('cy', 150);
 
 	circles
-		.attr('fill', 'red')
-		.attr('border', '3px solid black');
+		.attr('fill', 'steelblue');
 
 
 	var circle_text = circles.select('text')
 		.data(info)
 		.enter()
 		.append('text')
-		.attr('x', function(d){ return 50 + (x(d[1])); })
+		.attr('x', function(d){ return 100 + (x(d[1])); })
 		.attr('y', 150)
 		.attr('color', 'black')
 		.attr('font-size', '30px')
