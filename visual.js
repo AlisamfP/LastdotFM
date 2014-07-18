@@ -23,11 +23,12 @@ function generateChart(info){
   x.domain(info.map(function(n){ return n[0];}));
   y.domain([0, d3.max(info.map(function(n){ return n[1];}))]);
 
-var bar = chart.selectAll('.bar')
-          .data(info)
-            .enter()
-              .append('rect')
-              .attr('class', 'bar')
+var bar =
+  chart.selectAll('.bar')
+    .data(info)
+      .enter()
+        .append('rect')
+        .attr('class', 'bar')
         .attr('id', function(d,i){return i;})
         .attr('x', function(d){ return x(d[0]); })
         .attr('y', function(d){ return y(d[1]); })

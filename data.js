@@ -27,10 +27,10 @@ $('document').ready(function(){
 		})
 		.always(function() {
 			console.log('complete');
-			$('.bar').click(function(){
-				var active = '.barText' + this.id.toString();
-				$(active).removeAttr('visibility');
-			});
+			// $('.bar').click(function(){
+			// 	var active = '.barText' + this.id.toString();
+			// 	$(active).removeAttr('visibility');
+			// });
 		});
 	}
 
@@ -39,6 +39,7 @@ $('document').ready(function(){
 		for (item in array){
 			artists.push([array[item]['name'], parseInt(array[item]['playcount'])]);
 		}
-		return generateChart(artists);
+		// return generateChart(artists);
+		return createCircles(artists);
 	}
 });
