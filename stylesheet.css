@@ -8,7 +8,7 @@ html {
 .circle:hover {
 	fill: brown;
 }
-/*.axis text {
+.axis text {
     font: 10px sans-serif;
     color: white;
 }
@@ -17,7 +17,7 @@ html {
     fill: none;
     stroke: #000;
     shape-rendering: crispEdges;
-}*/
+}
 text {
 	fill: white;
 	font-size: 17px;

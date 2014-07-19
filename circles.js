@@ -1,11 +1,14 @@
 function createCircles(info){
-	var margin = {top: 20, right: 30, bottom: 30, left: 40},
+	var margin = {top: 20, right: 30, bottom: 30, left: 60},
     	width = 960 - margin.left - margin.right,
     	height = 500 - margin.top - margin.bottom;
 
-	var x = d3.scale.linear()
-		.domain([d3.max(info.map(function(n){ return n[1]; })),0])
-		.range([0,width]);
+	// var x = d3.scale.linear()
+	// 	.domain([d3.max(info.map(function(n){ return n[1]; })), 0])
+	// 	.range([0,width]);
+	var x = d3.scale.ordinal()
+		.domain(info.map(function(n){ return n[0]; }))
+		.rangeRoundBands([0,width], .1);
 
 	var circleScale = d3.scale.linear()
 		.domain([0,d3.max(info.map(function(n){ return n[1]; }))])
@@ -24,19 +27,17 @@ function createCircles(info){
 			return (circleScale(d[1]));
 		})
 		.attr('cx', function(d){
-			return(100 + x(d[1]));
+			console.log(x(d[0]));
+			return(margin.left + x(d[0]));
 		})
 		.attr('cy', 150);
-
-	circles
-		.attr('fill', 'steelblue');
 
 
 	var circle_text = circles.select('text')
 		.data(info)
 		.enter()
 		.append('text')
-		.attr('x', function(d){ return 100 + (x(d[1])); })
+		.attr('x', function(d){ return (margin.left + x(d[0])); })
 		.attr('y', 150)
 		.attr('color', 'black')
 		.attr('font-size', '30px')
