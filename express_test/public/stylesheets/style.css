@@ -1,7 +1,24 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+html {
+	color: white;
+	background-image: url("bkgrndimg.png");
 }
-a {
-  color: #00b7ff;
+.circle{
+	fill: steelblue;
+}
+.circle:hover {
+	fill: brown;
+}
+.axis text {
+    font: 10px sans-serif;
+    color: white;
+}
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+text {
+	fill: white;
+	font-size: 17px;
 }
