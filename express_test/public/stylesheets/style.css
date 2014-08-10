@@ -5,26 +5,26 @@ a {
   color: #00b7ff;
 }
 html {
-	color: white;
-	background-image: url("bkgrndimg.png");
+  color: #fff;
+  background-image: url("bkgrndimg.png");
 }
-.bar{
-	fill: steelblue;
+.bar {
+  fill: #4682b4;
 }
 .bar:hover {
-	fill: brown;
+  fill: #a52a2a;
 }
 .axis text {
-    font: 10px sans-serif;
-    color: white;
+  font: 10px sans-serif;
+  color: #fff;
 }
 .axis path,
 .axis line {
-    fill: none;
-    stroke: #000;
-    shape-rendering: crispEdges;
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
 }
 text {
-	fill: white;
-	font-size: 17px;
+  fill: #fff;
+  font-size: 17px;
 }
