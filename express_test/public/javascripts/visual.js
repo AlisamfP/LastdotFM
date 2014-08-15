@@ -29,7 +29,7 @@ function bars(data){
     .transition(300)
     .ease('exp')
       .attr('width', 0)
-      .remove()
+      .remove();
 
   bars.attr('stroke-width', 4)
     .transition()
@@ -45,23 +45,28 @@ function bars(data){
 
 
 
-  bars.select('text')
-    .data(data)
-        .enter()
-          .append('text')
-          .attr('class', function(d,i){ return 'barText' + i; })
-          .attr('transform', 'rotate(-90)')
-          .attr('y', function(d) { return xScale(d[0]); })
-          .attr('x', function(d) { return -height; })
-          .attr('height', function(d){ return height - yScale(d[1]); })
-          .attr('width', xScale.rangeBand())
-          .attr('dy', xScale.rangeBand()/2)
-          .attr('dx', 5)
-          .attr('text-anchor', 'left')
-          .attr('visibility', 'hidden')
-            .text(function(d){
-              return d[0];
-            });
+  // bars.select('text')
+  //   .data(data)
+  //       .enter()
+  //         .append('text')
+  //         .attr('class', function(d,i){ return 'barText' + i; })
+  //         .attr('transform', 'rotate(-90)')
+  //         .attr('y', function(d) { return xScale(d[0]); })
+  //         .attr('x', function(d) { return -height; })
+  //         .attr('height', function(d){ return height - yScale(d[1]); })
+  //         .attr('width', xScale.rangeBand())
+  //         .attr('dy', xScale.rangeBand()/2)
+  //         .attr('dx', 5)
+  //         .attr('text-anchor', 'left')
+  //         .attr('visibility', 'hidden')
+  //           .text(function(d){
+  //             return d[0];
+  //           });
+  // bars.on('click', function(){
+  //   var active = '.barText' + this.id.toString();
+  //     console.log(active);
+  //     d3.select(active).attr('visibility', 'visible');
+  //   });
 };
 
 function init(){
@@ -85,13 +90,7 @@ function init(){
       limit = document.getElementById('limit').value;
       makeURL(user, period, limit);
     });
-  d3.select('.bar')
-    .on('click', function(){
-      var active = '.barText' + this.id.toString();
-      console.log(active);
-      d3.select(active).attr('visibility', 'visible');
-    });
-  };
+};
 
 
 function makeURL(user, period, limit){
