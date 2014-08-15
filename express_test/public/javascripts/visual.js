@@ -1,4 +1,4 @@
-function update(data){
+function bars(data){
   var xScale = d3.scale.ordinal()
       .rangeRoundBands([0, width], .2);
   var yScale = d3.scale.linear()
@@ -39,6 +39,7 @@ function update(data){
             });
   chart.append('g').attr('class', 'y axis').call(yAxis);
 };
+
 function init(data){
   var margin = {top: 20, right: 30, bottom: 30, left: 40},
       width  = 960 - margin.left - margin.right,
@@ -46,9 +47,57 @@ function init(data){
   var chart = d3.select('.chart')
       .attr('width', width + margin.left + margin.right)
       .attr('height', height + margin.top + margin.bottom);
+  chart.append('svg:rect')
+    .attr('width', '100%')
+    .attr('height', '100%')
+    .attr('stroke', '#4682b4')
+    .attr('fill', 'none');
+
   chart.append('g')
+    .attr('id', 'barchart')
     .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
     // .attr('class', 'y axis')
     // .call(yAxis);
-    update(data);
-}
+  d3.select('#button')
+    .on('click', function(d){
+      user = document.getElementById('user').value;
+      period = document.getElementById('period').value;
+      limit = document.getElementById('limit').value;
+      bars(makeUrl(user, period, limit));
+  d3.select('.bar')
+    .on('click', function(d,i){
+      var active = '.barText' + this.id.toString();
+      d3.select(active).attr('visibility', 'visible');
+    });
+  });
+
+
+  function makeURL(user, period, limit){
+    limit = (isNaN(limit) !== true) ? parseInt(limit) : 10;
+    baseUrl = 'http://ws.audioscrobbler.com/2.0/?method=user.gettopartists&user=';
+    apiKey = '8148fb40ef9511752203d2c4591e63d0';
+    makeRequest(baseUrl+user
+      +'&api_key='+apiKey+
+      '&format=json&period='+period+
+      '&limit='+limit);
+  }
+  function makeRequest(apiUrl){
+    $.ajax({ url: apiUrl,
+    }).done(function(res) {
+      playCountData(res['topartists']['artist']);
+    }).fail(function(err) {
+      console.log('error: ', err);
+    }).always(function() {
+      console.log('complete');
+    });
+  }
+
+  function playCountData(array){
+    var artists = [];
+    for (item in array){
+      artists.push([array[item]['name'], parseInt(array[item]['playcount'])]);
+    }
+    return artists;
+    // return createCircles(artists);
+  }
+});
