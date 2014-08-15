@@ -16,16 +16,12 @@ $('document').ready(function(){
 			'&limit='+limit);
 	}
 	function makeRequest(apiUrl){
-		$.ajax({
-			url: apiUrl,
-		})
-		.done(function(res) {
+		$.ajax({ url: apiUrl,
+		}).done(function(res) {
 			playCountData(res['topartists']['artist']);
-		})
-		.fail(function(err) {
+		}).fail(function(err) {
 			console.log('error: ', err);
-		})
-		.always(function() {
+		}).always(function() {
 			console.log('complete');
 			$('.bar').click(function(){
 				var active = '.barText' + this.id.toString();
@@ -39,7 +35,7 @@ $('document').ready(function(){
 		for (item in array){
 			artists.push([array[item]['name'], parseInt(array[item]['playcount'])]);
 		}
-		return generateChart(artists);
+		return init(artists);
 		// return createCircles(artists);
 	}
 });
