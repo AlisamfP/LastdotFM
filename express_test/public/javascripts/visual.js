@@ -12,7 +12,6 @@ function bars(data){
   var yAxis = d3.svg.axis()
       .scale(yScale)
       .orient('left');
-  // chart.append('g').attr('class', 'y axis').call(yAxis);
   var chart = d3.select('#barchart');
   var bars = chart.selectAll('rect.bar')
             .data(data);
@@ -41,27 +40,28 @@ function bars(data){
       .attr('height', function(d){ return height - yScale(d[1]); });
 
                 
+  chart.attr('class', 'y axis').call(yAxis);
 
 
 
 
-  // bars.select('text')
-  //   .data(data)
-  //       .enter()
-  //         .append('text')
-  //         .attr('class', function(d,i){ return 'barText' + i; })
-  //         .attr('transform', 'rotate(-90)')
-  //         .attr('y', function(d) { return xScale(d[0]); })
-  //         .attr('x', function(d) { return -height; })
-  //         .attr('height', function(d){ return height - yScale(d[1]); })
-  //         .attr('width', xScale.rangeBand())
-  //         .attr('dy', xScale.rangeBand()/2)
-  //         .attr('dx', 5)
-  //         .attr('text-anchor', 'left')
-  //         .attr('visibility', 'hidden')
-  //           .text(function(d){
-  //             return d[0];
-  //           });
+  bars.select('text')
+    .data(data)
+        .enter()
+          .append('text')
+          .attr('class', function(d,i){ return 'barText' + i; })
+          .attr('transform', 'rotate(-90)')
+          .attr('y', function(d) { return xScale(d[0]); })
+          .attr('x', function(d) { return -height; })
+          .attr('height', function(d){ return height - yScale(d[1]); })
+          .attr('width', xScale.rangeBand())
+          .attr('dy', xScale.rangeBand()/2)
+          .attr('dx', 5)
+          .attr('text-anchor', 'left')
+          .attr('visibility', 'hidden')
+            .text(function(d){
+              return d[0];
+            });
 };
 
 function init(){
@@ -88,6 +88,7 @@ function init(){
   d3.select('.bar')
     .on('click', function(){
       var active = '.barText' + this.id.toString();
+      console.log(active);
       d3.select(active).attr('visibility', 'visible');
     });
   };

@@ -13,12 +13,11 @@ html
       option(value='3month') last 3 months
     | Limit (max 50):
     input#limit(type='text', value='10')
-    button#button Get Chart
+    button#button GENERATE
     br
     br
     br
     svg.chart
   script(src='//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js')
   script(src='http://d3js.org/d3.v3.min.js', charset='utf-8')
-  script(type='text/javascript', src='../javascripts/data.js')
   script(type='text/javascript', src='../javascripts/visual.js')
