@@ -53,15 +53,15 @@ function bars(dataset){
       .append('text')
       .attr('class', 'barText')
       .attr('transform', 'rotate(-90)')
-      .attr('text-anchor', 'left')
-      .text(function(d){
-        return d.name;
-      });
+      .attr('text-anchor', 'left');
 
 
   barText
     .transition(300)
     .ease('quad')
+      .text(function(d){
+        return d.name;
+      })
       .attr('x', function(d) { return -height; })
       .attr('y', function(d) { return xScale(d.name); })
       .attr('height', function(d){ return height - yScale(d.playcount); })
