@@ -19,9 +19,8 @@ function bars(dataset){
   var chart = d3.select('#barchart');
   var bars = chart.selectAll('rect.bar')
       .data(dataset, key);
-
-  var barText = bars.select('text')
-      .data(dataset, key.name);
+  var barText = chart.selectAll('text.barText')
+      .data(dataset, key);
 
   bars
     .attr('fill', '#4682b4')
@@ -52,22 +51,17 @@ function bars(dataset){
   barText
     .enter()
       .append('text')
-      .attr('class', function(d,i){ return 'barText' + i; })
+      .attr('class', 'barText')
       .attr('transform', 'rotate(-90)')
-      .attr('text-anchor', 'left');
+      .attr('text-anchor', 'left')
+      .text(function(d){
+        return d.name;
+      });
 
-  barText.exit()
-    .transition(300)
-    .ease('linear')
-      // .attr('width', 0)
-      .remove();
 
   barText
     .transition(300)
     .ease('quad')
-      .text(function(d){
-        return d.name;
-      })
       .attr('x', function(d) { return -height; })
       .attr('y', function(d) { return xScale(d.name); })
       .attr('height', function(d){ return height - yScale(d.playcount); })
@@ -75,6 +69,11 @@ function bars(dataset){
       .attr('dx', 5)
       .attr('dy', xScale.rangeBand()/2);
   
+  barText.exit()
+    .transition(300)
+    .ease('linear')
+      .attr('opacity', 0)
+      .remove();
   // bars.on('hover', function(){
   //     d3.select('.bar:.barText').attr('visibility', 'visible');
   //   });
