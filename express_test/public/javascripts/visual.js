@@ -2,19 +2,26 @@ var margin = {top: 20, right: 30, bottom: 30, left: 40}
 var width  = 960 - margin.left - margin.right;
 var height = 500 - margin.top - margin.bottom;
 
-function bars(data){
+var key = function(d){
+  return d.key ;
+}
+
+function bars(dataset){
   var xScale = d3.scale.ordinal()
-      .domain(data.map(function(n){ return n[0]; }))
+      .domain(dataset.map(function(n){ return n.name; }))
       .rangeRoundBands([0, width], .2);
   var yScale = d3.scale.linear()
-      .domain([0, d3.max(data.map(function(n){ return n[1];}))])
+      .domain([0, d3.max(dataset.map(function(n){ return n.playcount;}))])
       .range([height, 0]);
   var yAxis = d3.svg.axis()
       .scale(yScale)
       .orient('left');
   var chart = d3.select('#barchart');
   var bars = chart.selectAll('rect.bar')
-            .data(data);
+      .data(dataset, key);
+
+  var barText = bars.select('text')
+      .data(dataset, key.name);
 
   bars
     .attr('fill', '#4682b4')
@@ -31,41 +38,45 @@ function bars(data){
       .attr('width', 0)
       .remove();
 
-  bars.attr('stroke-width', 4)
+  bars
     .transition()
     .ease('quad')
-      .attr('x', function(d){ return xScale(d[0]); })
-      .attr('y', function(d){ return yScale(d[1]); })
+      .attr('x', function(d){ return xScale(d.name); })
+      .attr('y', function(d){ return yScale(d.playcount); })
       .attr('width', xScale.rangeBand())
-      .attr('height', function(d){ return height - yScale(d[1]); });
+      .attr('height', function(d){ return height - yScale(d.playcount); });
 
                 
   chart.attr('class', 'y axis').call(yAxis);
 
+  barText
+    .enter()
+      .append('text')
+      .attr('class', function(d,i){ return 'barText' + i; })
+      .attr('transform', 'rotate(-90)')
+      .attr('text-anchor', 'left');
 
+  barText.exit()
+    .transition(300)
+    .ease('linear')
+      // .attr('width', 0)
+      .remove();
 
-
-  // bars.select('text')
-  //   .data(data)
-  //       .enter()
-  //         .append('text')
-  //         .attr('class', function(d,i){ return 'barText' + i; })
-  //         .attr('transform', 'rotate(-90)')
-  //         .attr('y', function(d) { return xScale(d[0]); })
-  //         .attr('x', function(d) { return -height; })
-  //         .attr('height', function(d){ return height - yScale(d[1]); })
-  //         .attr('width', xScale.rangeBand())
-  //         .attr('dy', xScale.rangeBand()/2)
-  //         .attr('dx', 5)
-  //         .attr('text-anchor', 'left')
-  //         .attr('visibility', 'hidden')
-  //           .text(function(d){
-  //             return d[0];
-  //           });
-  // bars.on('click', function(){
-  //   var active = '.barText' + this.id.toString();
-  //     console.log(active);
-  //     d3.select(active).attr('visibility', 'visible');
+  barText
+    .transition(300)
+    .ease('quad')
+      .text(function(d){
+        return d.name;
+      })
+      .attr('x', function(d) { return -height; })
+      .attr('y', function(d) { return xScale(d.name); })
+      .attr('height', function(d){ return height - yScale(d.playcount); })
+      .attr('width', xScale.rangeBand())
+      .attr('dx', 5)
+      .attr('dy', xScale.rangeBand()/2);
+  
+  // bars.on('hover', function(){
+  //     d3.select('.bar:.barText').attr('visibility', 'visible');
   //   });
 };
 
@@ -116,8 +127,10 @@ function makeRequest(apiUrl){
 function filter(array){
   var result = [];
   for (item in array){
-    result.push([array[item]['name'], parseInt(array[item]['playcount'])]);
+    result.push({key: item, name: array[item]['name'], playcount: parseInt(array[item]['playcount'])});
   }
   return bars(result);
 }
+
+
 init();
