@@ -3,15 +3,15 @@ html
     title Music Visual Things
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    | Last.FM username:
+    | Last.FM username:  
     input#user(type='text', value='alisatrocity')
-    | Time period:
+    |   Time period:  
     select#period
       option(value='overall') overall
       option(value='7day') last 7 days
       option(value='1month') last 1 month
       option(value='3month') last 3 months
-    | Limit (max 50):
+    |   Limit (max 50):  
     input#limit(type='text', value='10')
     button#button GENERATE
     br

@@ -71,12 +71,9 @@ function bars(dataset){
   
   barText.exit()
     .transition(300)
-    .ease('linear')
-      .attr('opacity', 0)
+    // .ease('exp')
+    //   .attr('opacity', 0)
       .remove();
-  // bars.on('hover', function(){
-  //     d3.select('.bar:.barText').attr('visibility', 'visible');
-  //   });
 };
 
 function init(){
