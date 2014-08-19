@@ -71,8 +71,8 @@ function bars(dataset){
   
   barText.exit()
     .transition(300)
-    // .ease('exp')
-    //   .attr('opacity', 0)
+    .ease('exp')
+      .attr('opacity', 0)
       .remove();
 };
 
@@ -94,14 +94,18 @@ function init(){
     .on('click', function(){
       user = document.getElementById('user').value;
       period = document.getElementById('period').value;
-      limit = document.getElementById('limit').value;
+      limit = document.getElementById('nLimit').value;
       makeURL(user, period, limit);
     });
+    // d3.select("#nRadius").on("input", function() {
+    //   update(+this.value);
+    // });
 };
 
 
 function makeURL(user, period, limit){
   limit = (isNaN(limit) !== true) ? parseInt(limit) : 10;
+  console.log(limit);
   baseUrl = 'http://ws.audioscrobbler.com/2.0/?method=user.gettopartists&user=';
   apiKey = '8148fb40ef9511752203d2c4591e63d0';
   return makeRequest(baseUrl+user
