@@ -71,8 +71,8 @@ function bars(dataset){
   
   barText.exit()
     .transition(300)
-    // .ease('exp')
-    //   .attr('opacity', 0)
+    .ease('exp')
+      .attr('opacity', 0)
       .remove();
 };
 
