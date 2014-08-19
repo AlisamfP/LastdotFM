@@ -90,18 +90,21 @@ function init(){
     .attr('id', 'barchart')
     .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
-  d3.select('#button')
-    .on('click', function(){
-      user = document.getElementById('user').value;
-      period = document.getElementById('period').value;
-      limit = document.getElementById('limit').value;
-      makeURL(user, period, limit);
-    });
+    d3.select('#period')
+      .on('input', function(){
+        return makeURL();
+      });
+    d3.select('#button')
+      .on('click', function(){
+        return makeURL();
+      })
 };
 
 
-function makeURL(user, period, limit){
-  limit = (isNaN(limit) !== true) ? parseInt(limit) : 10;
+function makeURL(){
+  user = document.getElementById('user').value;
+  period = document.getElementById('period').value;
+  limit = document.getElementById('nLimit').value;
   baseUrl = 'http://ws.audioscrobbler.com/2.0/?method=user.gettopartists&user=';
   apiKey = '8148fb40ef9511752203d2c4591e63d0';
   return makeRequest(baseUrl+user

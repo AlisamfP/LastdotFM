@@ -4,15 +4,15 @@ html
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
     | Last.FM username:  
-    input#user(type='text', value='alisatrocity')
+    input#user(type='text')
     |   Time period:  
     select#period
       option(value='overall') overall
       option(value='7day') last 7 days
       option(value='1month') last 1 month
       option(value='3month') last 3 months
-    |   Limit (max 50):  
-    input#limit(type='text', value='10')
+    |   limit =   
+    input#nLimit(type='range', min='2', max='50')
     button#button GENERATE
     br
     br
