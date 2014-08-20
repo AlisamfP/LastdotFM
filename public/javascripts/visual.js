@@ -94,8 +94,8 @@ function init(){
       .on('input', function(){
         return makeURL();
       });
-    var drag = d3.behavior.drag().
-      on('dragend', makeURL)
+    d3.select('#nLimit')
+      .on('mouseup', makeURL);
         // return makeURL();
       
 };
