@@ -1,19 +1,20 @@
 html
   head
-    title Music Visual Things
+    title Visualize.FM
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    | Last.FM username:  
-    input#user(type='text')
-    |   Time period:  
-    select#period
-      option(value='overall') overall
-      option(value='7day') last 7 days
-      option(value='1month') last 1 month
-      option(value='3month') last 3 months
-    |   limit =   
-    input#nLimit(type='range', min='2', max='50')
-    button#button GENERATE
+    form(onInput='limitValue.value=nLimit.value') 
+      | Last.FM username:  
+      input#user(type='text', value='alisatrocity')
+      |   Time period:  
+      select#period
+        option(value='overall') overall
+        option(value='7day') last 7 days
+        option(value='1month') last 1 month
+        option(value='3month') last 3 months
+      |   Limit =    
+      input#nLimit(type='range', name='nLimit', min='2', max='50')
+      output#limitValue(name='limitValue', value='')
     br
     br
     br

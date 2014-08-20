@@ -94,10 +94,10 @@ function init(){
       .on('input', function(){
         return makeURL();
       });
-    d3.select('#button')
-      .on('click', function(){
-        return makeURL();
-      })
+    var drag = d3.behavior.drag().
+      on('dragend', makeURL)
+        // return makeURL();
+      
 };
 
 
