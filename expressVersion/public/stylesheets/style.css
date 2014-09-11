@@ -14,9 +14,6 @@ html {
 .bar:hover {
   fill: #a52a2a;
 }
-circle:hover {
-  fill: #a52a2a;
-}
 .axis text {
   font: 10px sans-serif;
   color: #fff;

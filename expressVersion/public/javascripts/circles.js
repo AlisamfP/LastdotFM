@@ -9,16 +9,13 @@ var bubble = d3.layout.pack()
     .padding(1.5)
     .value(function(d){ return d.value; });
 
-var svg = d3.select("body").append("svg")
-    .attr("width", diameter)
-    .attr("height", diameter)
-    .attr("class", "bubble");
-
-
 function init(){
-    d3.select('#generate')
-      .on('click', getData);
-
+  
+  d3.select('#generate')
+      .on('click', function(){
+        d3.select('svg').remove();
+        return getData();
+      });
 };
 
 function getData(){
@@ -46,7 +43,12 @@ function classes(info){
 }
 
 function update(dataset){
-  var node = svg.selectAll('.node')
+  var svg = d3.select("body").append("svg")
+    .attr("width", diameter)
+    .attr("height", diameter)
+    .attr("class", "bubble");
+  
+  var node = d3.select('.bubble').selectAll('.node')
   .data(bubble.nodes(dataset)
   .filter(function(d) { return !d.children; }));
 
@@ -56,9 +58,10 @@ function update(dataset){
   .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
 
   node.append("circle")
+    .attr('class', 'circle')
     .attr('r', function(d){ return d.r; })
     .style("fill", '#4682b4');
-    
+
   node.append("text")
       .attr("dy", ".3em")
       .style("text-anchor", "middle")
