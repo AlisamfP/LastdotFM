@@ -1,12 +1,12 @@
 body {
-  padding: 50px;
+  background: url("bkgrndimg.png") repeat;
+  color: #fff;
 }
 a {
   color: #00b7ff;
 }
 html {
-  color: #fff;
-  background-image: url("bkgrndimg.png");
+  padding: 60px 0px 0px 0px;
 }
 .bar {
   fill: #4682b4;
@@ -15,8 +15,12 @@ html {
   fill: #a52a2a;
 }
 .axis text {
-  font: 10px sans-serif;
   color: #fff;
+  font: 10px sans-serif;
+}
+text {
+  color: #fff;
+  font-size: 17px;
 }
 .axis path,
 .axis line {
@@ -24,7 +28,12 @@ html {
   stroke: #000;
   shape-rendering: crispEdges;
 }
-text {
-  fill: #fff;
-  font-size: 17px;
+form {
+  color: #fff;
+}
+.auth {
+  position: absolute;
+  max-width: 60%;
+  max-height: 60%;
+  margin: 0 auto;
 }

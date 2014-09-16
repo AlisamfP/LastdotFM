@@ -3,7 +3,8 @@ html
     title Visualize.FM
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    form(onInput='limitValue.value=nLimit.value') 
+    form(onInput='limitValue.value=nLimit.value')
+      |   Username:   
       input#user(name='user', value='alisatrocity')
       |   Time period:  
       select#period
@@ -11,7 +12,6 @@ html
         option(value='7day') 7 Days
         option(value='1month') 1 Month
         option(value='3month') 3 Months
-      br
       |   Limit =       
       output#limitValue(name='limitValue', value='')     
       input#nLimit(type='range', name='nLimit', min='2', max='50')

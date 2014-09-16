@@ -11,7 +11,7 @@ var bubble = d3.layout.pack()
 function init(){
   d3.select('#generate')
     .on('click', function(){
-      d3.select('svg').remove();
+      d3.select('svg:g').remove();
       return getData();
     });
 };

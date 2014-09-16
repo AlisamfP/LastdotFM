@@ -1,10 +1,18 @@
 html
   head
     title Visualize.FM
+    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    ul
-        li
-            a(href='/bar_chart') Bar Chart 
-        li
-            a(href='/circle_chart') Circle Chart
+    div.navbar.navbar-inverse.navbar-fixed-top(role='navigation')
+      div.container
+        ul.nav.nav-tabs
+          li
+            a(href='/') Home
+    div.container
+      div.row
+        div.col-lg-6
+              a(href='/bar_chart') Bar Chart
+        div.col-lg-6 
+              a(href='/circle_chart') Circle Chart
+
