@@ -1,18 +1,27 @@
 html
   head
     title Visualize.FM
-    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
   body
     div.navbar.navbar-inverse.navbar-fixed-top(role='navigation')
       div.container
         ul.nav.nav-tabs
           li
             a(href='/') Home
-    div.container
+    div.container.home
       div.row
-        div.col-lg-6
-              a(href='/bar_chart') Bar Chart
-        div.col-lg-6 
-              a(href='/circle_chart') Circle Chart
+        div.col-md-4.charts
+          a(href='/bar_chart') Bar Chart
+          br
+          img(src='/assets/sapa-bar.jpg')
+        div.col-md-4.charts
+          a(href='/bubble_chart') Bubble Chart
+          br
+          img(src='/assets/bubbles.png')
+        div.col-md-4.charts
+          a(href='/pie_chart') Pie Chart
+          br
+          img(src='/assets/pieweebl.jpg')       
+
 

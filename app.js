@@ -7,7 +7,8 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var bar_chart = require('./routes/bar_chart');
-var circle_chart = require('./routes/circle_chart');
+var bubble_chart = require('./routes/bubble_chart');
+var pie_chart = require('./routes/pie_chart');
 
 var app = express();
 
@@ -25,7 +26,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use(bar_chart);
-app.use(circle_chart);
+app.use(bubble_chart);
+app.use(pie_chart);
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
