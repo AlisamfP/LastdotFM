@@ -8,6 +8,7 @@ html {
   color: #fff;
 }
 .charts {
+  font: 3em;
   text-align: center;
   border: 1px #000 solid;
   padding: 5px 5px;
@@ -24,7 +25,7 @@ html {
   fill: #a52a2a;
 }
 .axis text {
-  color: #fff;
+  fill: #fff;
   font: 10px sans-serif;
 }
 .axis path,

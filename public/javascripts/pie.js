@@ -23,7 +23,6 @@ d3.csv("/assets/data.csv", function(error, data) {
 
   data.forEach(function(d) {
     d.playcount = +d.playcount;
-    // console.log(d);
   });
 
   var g = svg.selectAll(".arc")
@@ -40,5 +39,14 @@ d3.csv("/assets/data.csv", function(error, data) {
       .attr("dy", ".35em")
       .style("text-anchor", "middle")
       .text(function(d) { return d.data.name; });
+
+  d3.selectAll('.arc').on('mouseover', function (d) {
+    var selection = d3.select(this);
+    selection.select('text').text(function (d){ return d.data.playcount; })
+  })
+  .on('mouseout', function (d){
+    var selection = d3.select(this);
+    selection.select('text').text(function (d){ return d.data.name; });
+  })
 
 });
