@@ -10,11 +10,10 @@ html {
 .charts {
   font: 3em;
   text-align: center;
-  border: 1px #000 solid;
   padding: 5px 5px;
-  height: 300px;
 }
 .charts img {
+  border: 1px #000 solid;
   max-width: 100%;
   max-height: 100%;
 }

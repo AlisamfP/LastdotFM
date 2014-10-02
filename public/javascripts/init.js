@@ -16,7 +16,7 @@ function init(){
     .attr('fill', 'none');
 
   chart.append('g')
-    .attr('id', 'musicChart')
+    .attr('id', 'chart')
     .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
     d3.select('#period')
@@ -42,13 +42,5 @@ function getData(){
       return filter(json['topartists']['artist']);
     });
 };
-
-function filter(array){
-  var result = [];
-  for (item in array){
-    result.push({key: item, name: array[item]['name'], playcount: parseInt(array[item]['playcount'])});
-  }
-  return update(result);
-}
 // authenticate();
 init();

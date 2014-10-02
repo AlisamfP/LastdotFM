@@ -29,13 +29,12 @@ function filter(array){
   return result;
 }
 
-
 d3.json(api_url, function(error, data) {
   console.log(data);
   data = filter(data['topartists']['artist']);
 
-  var g = svg.selectAll('.arc')
-      .data(pie(data))
+  var g = svg.datum(data).selectAll('.arc')
+      .data(pie)
     .enter().append('g')
       .attr('class', 'arc');
 

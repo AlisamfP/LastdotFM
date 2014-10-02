@@ -2,7 +2,6 @@ var diameter = window.innerHeight-100,
   format = d3.format(',d'),
   color = d3.scale.category20c();
 
-
 var bubble = d3.layout.pack()
   .sort(null)
   .size([diameter, diameter])
@@ -17,26 +16,12 @@ function init(){
     });
 };
 
-function getData(){
-  var user = d3.select('#user').property('value'),
-  period = d3.select('#period').property('value'),
-  limit = d3.select('#nLimit').property('value'),
-  baseUrl = 'http://ws.audioscrobbler.com/2.0/?method=user.gettopartists&user=',
-  apiKey = '8148fb40ef9511752203d2c4591e63d0';
-  d3.json(baseUrl+user+'&api_key='+apiKey+'&format=json&period='+period+'&limit='+limit, 
-    function(error, json) {
-      if (error) return console.warn(error);
-      dataset = classes(json['topartists']['artist']);
-      return update(dataset);
-    });
-};
-
-function classes(info){
+function filter(info){
   var array = [];
   for (item in info){
     array.push({key: item, name: info[item]['name'], value: parseInt(info[item]['playcount'])});
   }
-  return {children: array};
+  return update{children: array};
 }
 
 function update(dataset){
