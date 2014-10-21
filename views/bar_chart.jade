@@ -3,9 +3,8 @@ html
     title Visualize.FM
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
+    header #{user}
     form(onInput='limitValue.value=nLimit.value')
-      |   Username:   
-      input#user(name='user', value='alisatrocity')
       |   Time period:  
       select#period
         option(value='overall') Overall
