@@ -3,21 +3,20 @@ var mongo = require('mongodb').MongoClient,
   _ = require('lodash'),
   request = require('request');
 
-var lastFmUrl = "http://ws.audioscrobbler.com/2.0/?method=user.gettopartists&api_key=8148fb40ef9511752203d2c4591e63d0&format=json&user=";
-
 // Connection URL
 var url = 'mongodb://104.131.35.144:27017/lastfm';
 
 function getData(user, period, callback) {
+  var lastFmUrl = "http://ws.audioscrobbler.com/2.0/?method=user.gettopartists&api_key=8148fb40ef9511752203d2c4591e63d0&format=json&user=";
   var api = lastFmUrl + user + "&period=" + String(period);
-  console.log(api);
-  request(api, function(err, res, body) {
-    if (!err & res.statusCode == 200) {
-      var data = JSON.parse(body)['topartists'];
-      data = pluckData(data);
-      callback(data, period);
-    }
-  });
+    request(api, function(err, res, body) {
+      if (!err & res.statusCode == 200) {
+        var data = JSON.parse(body)['topartists'];
+        data = pluckData(data);
+        period = (period==="overall") ? period : convert[period];
+        callback(data, period);
+      }
+    });
 }
 
 function pluckData(data){
@@ -44,5 +43,16 @@ function insertData(data, period){
   });
 }
 
+var convert = {
+  "7day": "oneWeek",
+  "1month": "oneMonth",
+  "3month": "threeMonths",
+  "6month": "sixMonths",
+  "12month": "oneYear"
+};
+
 
 getData('alisatrocity', 'overall', insertData);
+getData('alisatrocity', '7day', insertData);
+getData('alisatrocity', '1month', insertData);
+getData('alisatrocity', '3month', insertData);
