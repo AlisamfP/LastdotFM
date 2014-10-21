@@ -3,15 +3,14 @@ var mongo = require('mongodb').MongoClient,
   _ = require('lodash'),
   request = require('request');
 
-function auth(){
-  var authUrl = 'http://www.last.fm/api/auth/?api_key' + process.env.API_KEY;
+function init(){
+  var authUrl = 'http://www.last.fm/api/auth/?api_key' + process.env.API_KEY
   $('.auth').on('click', function(){
     request(authUrl, function(err, res, body){
       if(!err & res.statusCode==200){
-        console.log(body);
+        
       }
-    });
-  });
+    })
 }
 
 function getData(user, period, callback) {
@@ -60,4 +59,9 @@ var convert = {
   "12month": "oneYear"
 };
 
-init();
+function addDatas() {
+  getData('alisatrocity', 'overall', insertData);
+  getData('alisatrocity', '7day', insertData);
+  getData('alisatrocity', '1month', insertData);
+  getData('alisatrocity', '3month', insertData);
+};
