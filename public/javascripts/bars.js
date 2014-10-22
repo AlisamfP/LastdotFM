@@ -1,14 +1,22 @@
-var margin = {top: 20, right: 30, bottom: 30, left: 40}
-var width  = 960 - margin.left - margin.right;
+var margin = {
+  top: 20,
+  right: 30,
+  bottom: 30,
+  left: 40
+};
+var width = 960 - margin.left - margin.right;
 var height = 500 - margin.top - margin.bottom;
 
-var key = function(d){
-  return d.key ;
-}
-function init(){
+$('.user').text(localStorage.user);
+
+var key = function(d) {
+  return d.key;
+};
+
+function init() {
   var chart = d3.select('.chart')
-      .attr('width', width + margin.left + margin.right)
-      .attr('height', height + margin.top + margin.bottom);
+    .attr('width', width + margin.left + margin.right)
+    .attr('height', height + margin.top + margin.bottom);
 
   chart.append('svg:rect')
     .attr('width', '100%')
@@ -19,88 +27,111 @@ function init(){
     .attr('id', 'musicChart')
     .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
-    d3.select('#period')
-      .on('input', getData);
+  d3.select('#period')
+    .on('input', getData);
 
-    d3.select('#nLimit')
-      .on('mouseup', getData);
+  d3.select('#nLimit')
+    .on('mouseup', getData);
 
-};
-function filter(array){
+}
+
+function filter(array) {
   var result = [];
-  for (item in array){
-    result.push({key: item, name: array[item]['name'], playcount: parseInt(array[item]['playcount'])});
+  for (item in array) {
+    result.push({
+      key: item,
+      name: array[item]['name'],
+      playcount: parseInt(array[item]['playcount'])
+    });
   }
   return update(result);
 }
-function update(dataset){
+
+function update(dataset) {
   var xScale = d3.scale.ordinal()
-      .domain(dataset.map(function(n){ return n.name; }))
-      .rangeRoundBands([0, width], .2);
+    .domain(dataset.map(function(n) {
+      return n.name;
+    }))
+    .rangeRoundBands([0, width], .2);
   var yScale = d3.scale.linear()
-      .domain([0, d3.max(dataset.map(function(n){ return n.playcount;}))])
-      .range([height, 0]);
+    .domain([0, d3.max(dataset.map(function(n) {
+      return n.playcount;
+    }))])
+    .range([height, 0]);
   var yAxis = d3.svg.axis()
-      .scale(yScale)
-      .orient('left');
+    .scale(yScale)
+    .orient('left');
   var chart = d3.select('#musicChart');
   var bars = chart.selectAll('rect.bar')
-      .data(dataset, key);
+    .data(dataset, key);
   var barText = chart.selectAll('text.barText')
-      .data(dataset, key);
+    .data(dataset, key);
 
   bars
     .attr('fill', '#4682b4')
 
   bars
     .enter()
-      .append('svg:rect')
-      .attr('class', 'bar')
-      .attr('id', function(d,i){return i;});
+    .append('svg:rect')
+    .attr('class', 'bar')
+    .attr('id', function(d, i) {
+      return i;
+    });
 
   bars.exit()
     .transition(300)
     .ease('exp')
-      .attr('width', 0)
-      .remove();
+    .attr('width', 0)
+    .remove();
 
   bars
     .transition()
     .ease('quad')
-      .attr('x', function(d){ return xScale(d.name); })
-      .attr('y', function(d){ return yScale(d.playcount); })
-      .attr('width', xScale.rangeBand())
-      .attr('height', function(d){ return height - yScale(d.playcount); });
+    .attr('x', function(d) {
+      return xScale(d.name);
+    })
+    .attr('y', function(d) {
+      return yScale(d.playcount);
+    })
+    .attr('width', xScale.rangeBand())
+    .attr('height', function(d) {
+      return height - yScale(d.playcount);
+    });
 
-                
   chart.attr('class', 'y axis').call(yAxis);
 
   barText
     .enter()
-      .append('text')
-      .attr('class', 'barText')
-      .attr('transform', 'rotate(-90)')
-      .attr('text-anchor', 'left');
+    .append('text')
+    .attr('class', 'barText')
+    .attr('transform', 'rotate(-90)')
+    .attr('text-anchor', 'left');
 
 
   barText
     .transition(300)
     .ease('quad')
-      .text(function(d){
-        return d.name;
-      })
-      .attr('x', function(d) { return -height; })
-      .attr('y', function(d) { return xScale(d.name); })
-      .attr('height', function(d){ return height - yScale(d.playcount); })
-      .attr('width', xScale.rangeBand())
-      .attr('dx', 5)
-      .attr('dy', xScale.rangeBand()/2);
-  
+    .text(function(d) {
+      return d.name;
+    })
+    .attr('x', function(d) {
+      return -height;
+    })
+    .attr('y', function(d) {
+      return xScale(d.name);
+    })
+    .attr('height', function(d) {
+      return height - yScale(d.playcount);
+    })
+    .attr('width', xScale.rangeBand())
+    .attr('dx', 5)
+    .attr('dy', xScale.rangeBand() / 2);
+
   barText.exit()
     .transition(300)
     .ease('exp')
-      .attr('opacity', 0)
-      .remove();
+    .attr('opacity', 0)
+    .remove();
 };
 
 

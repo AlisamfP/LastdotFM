@@ -3,12 +3,14 @@ html
     title Visualize.FM
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+    script(src='//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js')
+    script(type='text/javascript', src='../javascripts/auth.js')
   body
     div.container.home
       div.row.auth
-        form.form-group
+        form#auth.form-group
           label Enter Your Last.FM Username
-          input.form-control(
+          input.form-control.userName(
             type='text',
             name='userName'
           )

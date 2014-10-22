@@ -34,7 +34,7 @@ function init() {
 }
 
 function getData() {
-  user = d3.select('#user').property('value');
+  user = localStorage.user;
   period = d3.select('#period').property('value');
   limit = d3.select('#nLimit').property('value');
   baseUrl = 'http://ws.audioscrobbler.com/2.0/?method=user.gettopartists&user=';

@@ -3,17 +3,6 @@ var mongo = require('mongodb').MongoClient,
   _ = require('lodash'),
   request = require('request');
 
-function auth(){
-  var authUrl = 'http://www.last.fm/api/auth/?api_key' + process.env.API_KEY;
-  $('.auth').on('click', function(){
-    request(authUrl, function(err, res, body){
-      if(!err & res.statusCode==200){
-        console.log(body);
-      }
-    });
-  });
-}
-
 function getData(user, period, callback) {
   var lastFmUrl = "http://ws.audioscrobbler.com/2.0/?method=user.gettopartists&api_key=" + process.env.API_KEY + "&format=json&user=";
   var api = lastFmUrl + user + "&period=" + String(period);
@@ -60,4 +49,4 @@ var convert = {
   "12month": "oneYear"
 };
 
-init();
+auth();

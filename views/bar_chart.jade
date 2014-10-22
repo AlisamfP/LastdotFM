@@ -2,20 +2,39 @@ html
   head
     title Visualize.FM
     link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css")
   body
-    header #{user}
-    form(onInput='limitValue.value=nLimit.value')
-      |   Time period:  
-      select#period
-        option(value='overall') Overall
-        option(value='7day') 7 Days
-        option(value='1month') 1 Month
-        option(value='3month') 3 Months
-      |   Limit =       
-      output#limitValue(name='limitValue', value='')     
-      input#nLimit(type='range', name='nLimit', min='2', max='50')
+    nav.navbar.navbar-inverse.navbar-fixed-top(role='navigation')
+      div.container-fluid
+        a.navbar-brand.user(href='#')
+        ul.nav.navbar-nav
+          li.dropdown
+            a.dropdown-toggle(
+              href="#",
+              data-toggle='dropdown'
+            ) PERIOD
+            ul.dropdown-menu(
+              role='menu'
+            )
+              li overall
+              li.divider
+              li one week
+              li.divider
+              li one month
+    //- header #{user}
+    //- form(onInput='limitValue.value=nLimit.value')
+    //-   |   Time period:  
+    //-   select#period
+    //-     option(value='overall') Overall
+    //-     option(value='7day') 7 Days
+    //-     option(value='1month') 1 Month
+    //-     option(value='3month') 3 Months
+    //-   |   Limit =       
+    //-   output#limitValue(name='limitValue', value='')     
+    //-   input#nLimit(type='range', name='nLimit', min='2', max='50')
     svg.chart
   script(src='//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js')
+  script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js")
   script(src='http://d3js.org/d3.v3.min.js', charset='utf-8')
   script(type='text/javascript', src='../javascripts/init.js')
   script(type='text/javascript', src='../javascripts/bars.js')
