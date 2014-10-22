@@ -1,43 +1,6 @@
-var margin = {
-  top: 20,
-  right: 30,
-  bottom: 30,
-  left: 40
-};
-var width = 960 - margin.left - margin.right;
-var height = 500 - margin.top - margin.bottom;
-
-$('.user').text(localStorage.user);
-
-var key = function(d) {
-  return d.key;
-};
-
-function init() {
-  var chart = d3.select('.chart')
-    .attr('width', width + margin.left + margin.right)
-    .attr('height', height + margin.top + margin.bottom);
-
-  chart.append('svg:rect')
-    .attr('width', '100%')
-    .attr('height', '100%')
-    .attr('fill', 'none');
-
-  chart.append('g')
-    .attr('id', 'musicChart')
-    .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
-
-  d3.select('#period')
-    .on('input', getData);
-
-  d3.select('#nLimit')
-    .on('mouseup', getData);
-
-}
-
 function filter(array) {
   var result = [];
-  for (item in array) {
+  for (var item in array) {
     result.push({
       key: item,
       name: array[item]['name'],
@@ -52,7 +15,7 @@ function update(dataset) {
     .domain(dataset.map(function(n) {
       return n.name;
     }))
-    .rangeRoundBands([0, width], .2);
+    .rangeRoundBands([0, width], 0.2);
   var yScale = d3.scale.linear()
     .domain([0, d3.max(dataset.map(function(n) {
       return n.playcount;
@@ -61,14 +24,14 @@ function update(dataset) {
   var yAxis = d3.svg.axis()
     .scale(yScale)
     .orient('left');
-  var chart = d3.select('#musicChart');
+  var chart = d3.select('#chart');
   var bars = chart.selectAll('rect.bar')
     .data(dataset, key);
   var barText = chart.selectAll('text.barText')
     .data(dataset, key);
 
   bars
-    .attr('fill', '#4682b4')
+    .attr('fill', '#4682b4');
 
   bars
     .enter()
@@ -132,7 +95,4 @@ function update(dataset) {
     .ease('exp')
     .attr('opacity', 0)
     .remove();
-};
-
-
-init();
+}

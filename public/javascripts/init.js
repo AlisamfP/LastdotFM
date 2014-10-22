@@ -7,6 +7,11 @@ var margin = {
 var width = 960 - margin.left - margin.right;
 var height = 500 - margin.top - margin.bottom;
 
+$('.user').text(localStorage.user);
+$('#nLimit').on('input', function(){
+  $('#limitValue').text($('#nLimit').val());
+});
+
 var key = function(d) {
   return d.key;
 };
@@ -35,6 +40,7 @@ function init() {
 
 function getData() {
   user = localStorage.user;
+  console.log(user);
   period = d3.select('#period').property('value');
   limit = d3.select('#nLimit').property('value');
   baseUrl = 'http://ws.audioscrobbler.com/2.0/?method=user.gettopartists&user=';
@@ -47,5 +53,5 @@ function getData() {
       return filter(json['topartists']['artist']);
     });
 }
-// authenticate();
-// init();
+
+init();
