@@ -8,7 +8,7 @@ var width = 960 - margin.left - margin.right;
 var height = 500 - margin.top - margin.bottom;
 
 $('.user').text(localStorage.user);
-$('#nLimit').on('input', function(){
+$('#nLimit').on('input', function() {
   $('#limitValue').text($('#nLimit').val());
 });
 
@@ -36,19 +36,20 @@ function init() {
   d3.select('#nLimit')
     .on('mouseup', getData);
 
+  d3.select('#generate')
+    .on('click', function() {
+      d3.select('svg').remove();
+      return getData();
+    });
+
 }
 
 function getData() {
-  user = localStorage.user;
-  console.log(user);
-  period = d3.select('#period').property('value');
-  limit = d3.select('#nLimit').property('value');
-  baseUrl = 'http://ws.audioscrobbler.com/2.0/?method=user.gettopartists&user=';
-  apiKey = '8148fb40ef9511752203d2c4591e63d0';
-  console.log(user, period, limit);
-  d3.json(baseUrl + user + '&api_key=' + apiKey +
-    '&format=json&period=' + period +
-    '&limit=' + limit, function(error, json) {
+  var user = '&user=' + localStorage.user;
+  var period = '&period=' + d3.select('#period').property('value');
+  var limit = '&limit=' + d3.select('#nLimit').property('value');
+  var baseUrl = 'http://ws.audioscrobbler.com/2.0/?method=user.gettopartists&format=json&api_key=8148fb40ef9511752203d2c4591e63d0';
+  d3.json(baseUrl + user + period + limit, function(error, json) {
       if (error) return console.warn(error);
       return filter(json['topartists']['artist']);
     });

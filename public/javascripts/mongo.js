@@ -48,5 +48,3 @@ var convert = {
   "6month": "sixMonths",
   "12month": "oneYear"
 };
-
-auth();

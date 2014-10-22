@@ -2,7 +2,22 @@ html
   head
     title Visualize.FM
     link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css")
   body
+    nav.navbar.navbar-inverse.navbar-fixed-top(role='navigation')
+      div.container-fluid
+        p.navbar-brand.user
+        form.navbar-form
+          div.form-group.nav-input
+            label(for='period') Period 
+            select#period.form-control
+              option(value='overall') Overall
+              option(value='7day') One Week
+              option(value='1month') One Month
+              option(value='3month') Three Months
+            label(for='nLimit') Limit: 
+            output#limitValue.form-control(name='limitValue', value='')     
+            input#nLimit.form-control(type='range', name='nLimit', min='2', max='50')
   script(src='//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js')
   script(src='http://d3js.org/d3.v3.min.js', charset='utf-8')
   script(type='text/javascript', src='../javascripts/pie.js')

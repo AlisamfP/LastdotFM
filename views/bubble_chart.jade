@@ -2,20 +2,23 @@ html
   head
     title Visualize.FM
     link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css")
   body
-    form(onInput='limitValue.value=nLimit.value') 
-      | Username: 
-      input#user(name='user', value='alisatrocity')
-      |   Time period:  
-      select#period
-        option(value='overall') Overall
-        option(value='7day') 7 Days
-        option(value='1month') 1 Month
-        option(value='3month') 3 Months
-      |   Limit =       
-      output#limitValue(name='limitValue', value='')     
-      input#nLimit(type='range', name='nLimit', min='2', max='50')
-      button#generate(type='button', name='generate') Generate Chart
+    nav.navbar.navbar-inverse.navbar-fixed-top(role='navigation')
+      div.container-fluid
+        p.navbar-brand.user
+        form.navbar-form
+          div.form-group.nav-input
+            label(for='period') Period 
+            select#period.form-control
+              option(value='overall') Overall
+              option(value='7day') One Week
+              option(value='1month') One Month
+              option(value='3month') Three Months
+            label(for='nLimit') Limit: 
+            output#limitValue.form-control(name='limitValue', value='')     
+            input#nLimit.form-control(type='range', name='nLimit', min='2', max='50')
+          button#generate(type='button', name='generate') Generate Chart
   script(src='//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js')
   script(src='http://d3js.org/d3.v3.min.js', charset='utf-8')
   script(type='text/javascript', src='../javascripts/bubbles.js')
