@@ -17,7 +17,7 @@ function getData(user, period, callback) {
 }
 
 function pluckData(data) {
-  var result = [];
+  var result = [req.query.userName];
   _.forEach(data.artist, function(item) {
     result.push({
       rank: item['@attr'].rank,
@@ -48,3 +48,14 @@ var convert = {
   "6month": "sixMonths",
   "12month": "oneYear"
 };
+
+function init(user) {
+  getData(user, 'overall', insertData);
+  getData(user, '7day', insertData);
+  getData(user, '1month', insertData);
+  getData(user, '3month', insertData);
+  getData(user, '6month', insertData);
+  getData(user, '12month', insertData);
+};
+
+module.exports = init;
